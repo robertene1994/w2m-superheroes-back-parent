@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Superheroes
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Robert
+Implementation-Vendor-Id: com.robertene
+Build-Jdk: 1.8.0_301
+Implementation-URL: https://spring.io/projects/spring-boot/auth
+Created-By: Maven Integration for Eclipse
+Main-Class: com.robertene.superheroes.AuthApplication
+
