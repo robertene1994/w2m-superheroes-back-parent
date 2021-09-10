@@ -1,0 +1,91 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd 
+    http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+	<property name="schema" value="auth" />
+	<property name="schema_public" value="view" />
+
+	<property name="autoincrement.type" value="BIGINT" dbms="hsqldb, h2" />
+
+	<changeSet author="Robert" id="${schema}.schema.model.1" runOnChange="true">
+		<!-- 
+			Creación del schema del microservicio "auth". 
+		-->
+		<comment>${schema}</comment>
+
+		<sql>
+			CREATE SCHEMA if not exists ${schema};
+		</sql>
+	</changeSet>
+
+	<changeSet author="Robert" id="${schema}.schema.model.2"
+		runOnChange="true">
+		<!-- 
+			Creación del schema responsable de almacenar las vistas correspondientes a las diferentes tablas del sistema. 
+		-->
+		<comment>${schema}</comment>
+
+		<sql>
+			CREATE SCHEMA if not exists ${schema_public};
+		</sql>
+	</changeSet>
+
+	<changeSet author="Robert" id="${schema}.usuarios.model.1">
+		<!-- 
+			Creación de la tabla "users". 
+		-->
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="users" schemaName="${schema}" />
+			</not>
+		</preConditions>
+
+		<comment>${schema}</comment>
+
+		<createTable tableName="users" schemaName="${schema}">
+			<column autoIncrement="true" name="id" type="${autoincrement.type}">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="users_pk" />
+			</column>
+
+			<column name="username" type="VARCHAR(30)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="role" type="VARCHAR(15)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="first_name" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="last_name" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="email" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="password" type="VARCHAR(100)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<createIndex indexName="users_username_idx" schemaName="${schema}" tableName="users" unique="true">
+			<column name="username" />
+		</createIndex>
+
+		<createView replaceIfExists="true" schemaName="${schema_public}" viewName="users_v">
+			SELECT u.*
+			FROM ${schema}.users u
+	    </createView>
+	</changeSet>
+
+</databaseChangeLog>

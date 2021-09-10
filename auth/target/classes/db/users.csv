@@ -1,0 +1,3 @@
+id;username;role;first_name;last_name;email;password
+1;jose;ADMIN;José;Rodríguez García;jose@w2m.es;$2a$12$FQW8TCGZ7tmytwgNaOLJeeizCaRBts0ZK27IZrGlRGOwIcdOS6Iq.
+2;robert;USER;Robert;Ene;robert@w2m.es;$2a$12$JXTYZxPd23o/xtG6f8mPG.ptIETZRB1TZa0CoxD9Aw2o25KW1vY0m
