@@ -12,24 +12,20 @@
 	<name>Librería Global</name>
 
 	<description>
-		Librería global compartida por todos los microservicios de W2M-Superheroes.
+		Librería global compartida por todos los microservicios del sistema W2M-Superheroes.
 	</description>
 
 	<properties>
 		<java.version>11</java.version>
 		<maven.compiler.compiler>11</maven.compiler.compiler>
 		<maven.compiler.release>11</maven.compiler.release>
-		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<parent>
 		<groupId>com.robertene</groupId>
 		<artifactId>w2m-superheroes-back-parent</artifactId>
-		<version>1.0.0</version>
-		<relativePath>../pom.xml</relativePath>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
@@ -37,25 +33,24 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>2.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
 		<!-- Jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.12.5</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
-			<version>2.12.5</version>
 		</dependency>
 
 		<!-- Swagger -->
@@ -74,20 +69,24 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
 			<version>1.7</version>
 		</dependency>
 
+		<!-- Security -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.0</version>
+		</dependency>
+
 		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.20</version>
 		</dependency>
 
 		<!-- Maven -->
@@ -97,18 +96,31 @@
 			<version>3.8.2</version>
 		</dependency>
 	</dependencies>
-
-	<!-- <distributionManagement> <repository> <id>trendyol-maven-release</id> 
-		<name>Trendyol release</name> <url>some-url</url> </repository> </distributionManagement> -->
-
+	
 	<build>
+		<finalName>lib-global</finalName>
 		<plugins>
-			<!-- Lombok -->
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> 
-				<configuration> <source>11</source> <target>11</target> <annotationProcessorPaths> 
-				<path> <groupId>org.projectlombok</groupId> <artifactId>lombok</artifactId> 
-				<version>1.18.20</version> </path> </annotationProcessorPaths> </configuration> 
-				</plugin> -->
+			<!-- Maven -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- JavaDoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<noqualifier>all</noqualifier>
+					<reportOutputDirectory>${basedir}</reportOutputDirectory>
+					<destDir>doc</destDir>
+					<additionalparam>-Xdoclint:none</additionalparam>
+				</configuration>
+			</plugin>
 		</plugins>
+		<testResources>
+			<testResource>
+				<directory>src/main/webapp</directory>
+			</testResource>
+		</testResources>
 	</build>
 </project>

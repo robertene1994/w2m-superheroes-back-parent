@@ -10,14 +10,15 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.springframework.context.annotation.Bean;
 
-import com.google.common.collect.Lists;
-
+import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.Parameter;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
@@ -46,16 +47,23 @@ public abstract class SwaggerCommonConfig {
 				contact, "Licencia", "Licencia URL", new ArrayList<>());
 
 		Docket docket = new Docket(DocumentationType.SWAGGER_2).apiInfo(apinInfo)
-				.securityContexts(Lists.newArrayList(securityContext())).securitySchemes(Lists.newArrayList(apiKey()))
+				.securityContexts(List.of(securityContext())).securitySchemes(List.of(apiKey()))
 				.useDefaultResponseMessages(false).select()
 				.apis(RequestHandlerSelectors.basePackage("com.robertene.superheroes.controller")).build()
-				.forCodeGeneration(true);
+				.forCodeGeneration(true).globalOperationParameters(operationParameters());
 
 		List<Tag> swaggerTags = getSwaggerTags();
 		if (!swaggerTags.isEmpty()) {
 			swaggerTags.forEach(docket::tags);
 		}
 		return docket;
+	}
+
+	private List<Parameter> operationParameters() {
+		List<Parameter> headers = new ArrayList<>();
+		headers.add(new ParameterBuilder().name("x-forwarded-host").modelRef(new ModelRef("string"))
+				.parameterType("header").required(false).defaultValue("localhost:8080").build());
+		return headers;
 	}
 
 	protected abstract List<Tag> getSwaggerTags();
@@ -72,6 +80,6 @@ public abstract class SwaggerCommonConfig {
 		AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
 		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
 		authorizationScopes[0] = authorizationScope;
-		return Lists.newArrayList(new SecurityReference("JWT", authorizationScopes));
+		return List.of(new SecurityReference("JWT", authorizationScopes));
 	}
 }

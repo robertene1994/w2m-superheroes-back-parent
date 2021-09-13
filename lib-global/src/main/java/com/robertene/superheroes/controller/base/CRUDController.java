@@ -39,7 +39,7 @@ public interface CRUDController<T extends EntityBase<I>, I> extends Specificatio
 	public CRUDService<T, I> getService();
 
 	@ApiOperation(value = "Devuelve listado", nickname = "list")
-	@GetMapping(value = { "/", "" })
+	@GetMapping
 	default Iterable<DtoWrapper<T>> list(
 			@ApiParam(value = "filterParams") @RequestParam MultiValueMap<String, String> filterParams)
 			throws W2MException {
@@ -57,7 +57,7 @@ public interface CRUDController<T extends EntityBase<I>, I> extends Specificatio
 	}
 
 	@ApiOperation(value = "Crea un elemento", nickname = "create")
-	@PostMapping(value = { "/", "" })
+	@PostMapping
 	public default DtoWrapper<T> create(@ApiParam(value = "param") @RequestBody Optional<T> payload)
 			throws W2MException {
 		T element = payload.orElseThrow(InvalidInputDataException::new);

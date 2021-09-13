@@ -15,6 +15,15 @@ import com.robertene.superheroes.service.UserService;
 
 import io.swagger.annotations.Api;
 
+/**
+ * Clase que implementa las interfaces CRUDController y PaginationController y define
+ * las operaciones correspondientes a la entidad "User" (usuario).
+ * 
+ * @author Robert Ene
+ * @see com.robertene.superheroes.controller.base.CRUDController
+ * @see com.robertene.superheroes.controller.base.PaginationController
+ * 
+ */
 @RestController
 @RequestMapping({ "${w2m.rest.url.prefix}/users" })
 @Api(tags = SwaggerConfiguration.USER_TAG)

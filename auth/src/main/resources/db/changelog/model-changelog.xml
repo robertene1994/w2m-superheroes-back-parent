@@ -24,8 +24,7 @@
 		</sql>
 	</changeSet>
 
-	<changeSet author="Robert" id="${schema}.schema.model.2"
-		runOnChange="true">
+	<changeSet author="Robert" id="${schema}.schema.model.2" runOnChange="true">
 		<!-- 
 			Creación del schema responsable de almacenar las vistas correspondientes a las diferentes tablas del sistema. 
 		-->
@@ -36,7 +35,7 @@
 		</sql>
 	</changeSet>
 
-	<changeSet author="Robert" id="${schema}.usuarios.model.1">
+	<changeSet author="Robert" id="${schema}.users.model.1">
 		<!-- 
 			Creación de la tabla "users". 
 		-->

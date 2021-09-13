@@ -19,7 +19,7 @@ import lombok.ToString;
 
 @ApiModel(description = "Clase que representa las entidades de tipo usuario")
 @Data
-@ToString(callSuper = true, of = { "username", "email" })
+@ToString(callSuper = true, of = { "username", "role", "firstName", "lastName", "email" })
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "users", schema = DBConfiguration.DB_SCHEMA)

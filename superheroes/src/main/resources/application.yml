@@ -1,0 +1,77 @@
+spring:
+   servlet:
+      multipart:
+         max-file-size: 10MB
+         max-request-size: 10MB
+   profiles:
+      active: ${profile:local}
+   application:
+      name: Superheroes
+   liquibase:
+      change-log: classpath:db/liquibase-changelog.xml
+      contexts: ${profile:local}
+   jackson:
+      time-zone: Europe/Madrid
+      serialization:
+         indent-output: true
+         fail-on-empty-beans: false
+         write-dates-as-timestamps: false
+      deserialization:
+         adjust-dates-to-context-time-zone: true
+   datasource:
+      username: ${db-user:superheroes}
+      password: ${db-password:superheroes}
+      url: jdbc:h2:tcp://localhost:9090/mem:superheroes
+      jdbc-url: ${spring.datasource.url}
+      platform: h2
+      driver-class-name: org.h2.Driver
+   jpa:
+      show-sql: true
+      database-platform: org.hibernate.dialect.H2Dialect
+      open-in-view: false
+      properties:
+         hibernate:
+            '[format_sql]': true
+            '[enable_lazy_load_no_trans]': false
+   h2:
+      console:
+         enabled: true
+server:
+   port: ${server-port:8082}
+   error:
+      whitelabel:
+         enabled: true
+eureka:
+   client:
+      serviceUrl:
+         defaultZone: http://localhost:8083/eureka
+gateway:
+   filter:
+      disabled: false
+      allowed-forwards: localhost:8080, w2m-gateway.herokuapp.com
+w2m:
+   name: superheroes
+   rest:
+      url:
+         prefix: /api/${w2m.name}
+jwt:
+   secret: ${jwtsecret:w2m_super_secret}
+---
+spring:
+   config:
+      activate:
+         on-profile: local
+   output:
+      ansi:
+         enabled: always
+   liquibase:
+      enabled: true
+   jpa:
+      show-sql: false
+      properties:
+         hibernate:
+            '[show_sql]': false
+            '[format_sql]': true
+            '[show_parameters]': true
+            temp:
+               '[use_jdbc_metadata_defaults]': false

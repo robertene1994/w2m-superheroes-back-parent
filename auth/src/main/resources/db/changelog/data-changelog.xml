@@ -11,7 +11,9 @@
 	<property name="first.value" value="1" dbms="postgresql,h2" />
 
 	<changeSet author="Robert" id="${schema}.users.data.1">
-		<!-- Carga de datos en la tabla "users". -->
+		<!-- 
+			Carga de datos en la tabla "users".
+		-->
 		<preConditions onFail="MARK_RAN">
 			<tableExists tableName="users" schemaName="${schema}" />
 		</preConditions>
