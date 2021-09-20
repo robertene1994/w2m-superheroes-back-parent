@@ -20,8 +20,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * Clase que define las operaciones correspondientes a la autenticación y gestión
- * de la sesión de los usuarios.
+ * Clase que define las operaciones correspondientes a la autenticación y
+ * gestión de la sesión de los usuarios.
  * 
  * @author Robert Ene
  *

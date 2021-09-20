@@ -8,7 +8,7 @@
 	<img src="https://forthebadge.com/images/badges/uses-git.svg"/>
 </h4>
   
-### Esta aplicación permite la gestión de usuarios (autenticados) y superhéroes a través de un sistema que ha sido construido utilizando como base el framework Spring Boot junto a otras tecologías como Spring Cloud, Spring Security, Spring Data, Spring Eureka y Netlix, sobre la plataforma Java.
+### Esta aplicación permite la gestión de usuarios (autenticados) y superhéroes a través de un sistema que ha sido construido utilizando como base el framework Spring Boot junto a otras tecologías como Spring Cloud, Spring Security, Spring Data, Spring Eureka y Netflix, sobre la plataforma Java.
 
 
 ## Instalación 🔧
