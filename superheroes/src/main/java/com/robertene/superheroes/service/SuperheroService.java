@@ -37,7 +37,7 @@ public class SuperheroService implements CRUDService<Superhero, Long>, Paginatio
 
 	@Override
 	public String getEntityName() {
-		return "Usuario";
+		return "Superhero";
 	}
 
 	@Override
